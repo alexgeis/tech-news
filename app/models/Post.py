@@ -16,10 +16,11 @@ class Post(Base):
     # below same as:
     # SELECT COUNT(votes.id) AS vote_count FROM votes WHERE votes.post_id = 1;
     vote_count = column_property(
-        select([func.count(Vote.id)]).where(Vote.post_id == id)
+        # select([func.count(Vote.id)]).where(Vote.post_id == id)
+        select(func.count(Vote.id)).where(Vote.post_id == id)
     )
 
     user = relationship('User')
-    # delete all comments from a removed post
+    # delete all comments & votes from a removed post
     comments = relationship('Comment', cascade='all,delete')
     votes = relationship('Vote', cascade='all,delete')
