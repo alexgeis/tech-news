@@ -1,7 +1,7 @@
 from flask import Blueprint
 from app.models import User
 from app.db import get_db
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 import sys
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -28,5 +28,11 @@ def signup():
         # insert failed, so rollback and send error to front end
         db.rollback()
         return jsonify(message='Signup failed'), 500
+
+    # clear existing session data and add new session properties
+    # sessions can only be created if there's a defined secret key (in app/__init__.py)
+    session.clear()
+    session['user_id'] = newUser.id
+    session['loggedIn'] = True
 
     return jsonify(id=newUser.id)
