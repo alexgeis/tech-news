@@ -1,7 +1,11 @@
 from os import getenv
 # from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
+# OG
 from sqlalchemy.orm import sessionmaker, declarative_base
+# from sqlalchemy.orm import sessionmaker, DeclarativeBase
+
+
 from dotenv import load_dotenv
 # flask application context global variable "g"
 from flask import g
@@ -12,7 +16,10 @@ load_dotenv()
 engine = create_engine(getenv('DB_URL'), echo=True,
                        pool_size=20, max_overflow=0)
 Session = sessionmaker(bind=engine)
+
 Base = declarative_base()
+# class Base(DeclarativeBase):
+#     pass
 
 
 def init_db(app):
