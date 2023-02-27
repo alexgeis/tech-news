@@ -88,6 +88,25 @@ def create():
     return jsonify(id=newPost.id)
 
 
+@bp.route('/posts/<id>', methods=['PUT'])
+def update(id):
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        # retrieve post and update title property
+        post = db.query(Post).filter(Post.id == id).one()
+        post.title = data['title']
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message='Post not found'), 404
+
+    return '', 204
+
+
 @bp.route('/comments', methods=['POST'])
 def comment():
     data = request.get_json()
