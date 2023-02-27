@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.models import User
+from app.models import User, Post, Comment, Vote
 from app.db import get_db
 from flask import Blueprint, request, jsonify, session
 import sys
@@ -23,7 +23,7 @@ def signup():
         db.add(newUser)
         db.commit()
     except:
-        print(sys.exe_info()[0])
+        print(sys.exc_info()[0])
         # insert failed, so rollback and send error to front end
         db.rollback()
         return jsonify(message='Signup failed'), 500
@@ -62,3 +62,27 @@ def logout():
     session.clear()
     # status code 204 indicates no content
     return '', 204
+
+
+@bp.route('/comments', methods=['POST'])
+def comment():
+    data = request.get_json()
+    db = get_db()
+
+    try:
+        # create a new comment
+        newComment = Comment(
+            comment_text=data['comment_text'],
+            post_id=data['post_id'],
+            user_id=session.get('user_id')
+        )
+
+        db.add(newComment)
+        db.commit()
+    except:
+        print(sys.exc_info()[0])
+
+        db.rollback()
+        return jsonify(message='Comment failed'), 500
+
+    return jsonify(id=newComment.id)
