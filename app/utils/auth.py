@@ -14,7 +14,7 @@ def login_required(func):
     return wrapped_function
 
 
-# Python decorator example in JavaScript
+# Python decorator example in JavaScript #
 
 # function login_required(func) {
 #   function wrapped_function() {
