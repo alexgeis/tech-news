@@ -83,6 +83,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 1%;
+	box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
@@ -173,6 +174,7 @@ main {
 .comment {
 	padding: 1%;
 	margin-bottom: 1%;
+	border-radius: 15px;
 }
 
 .comment:nth-child(odd) {
@@ -191,6 +193,17 @@ main {
 
 .edit-post-form {
 	margin-bottom: 5%;
+}
+
+.login-form,
+.signup-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.login-form button,
+.signup-form button {
+	padding: 8px 12px;
 }
 
 footer {
