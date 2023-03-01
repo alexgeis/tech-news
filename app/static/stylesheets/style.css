@@ -195,11 +195,18 @@ main {
 	margin-bottom: 5%;
 }
 
+.login-wrapper {
+	display: flex;
+	justify-content: center;
+	gap: 80px;
+}
+
 .login-form,
 .signup-form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 10px;
 }
 .login-form button,
 .signup-form button {
@@ -212,4 +219,11 @@ footer {
 	justify-content: center;
 	padding: 1%;
 	font-size: 110%;
+}
+
+@media screen and (max-width: 600px) {
+	.login-wrapper {
+		flex-direction: column;
+		gap: 20px;
+	}
 }
