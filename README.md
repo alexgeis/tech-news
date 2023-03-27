@@ -20,7 +20,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/alexgeis/tech-news">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="app/static/assets/python-logo.png" alt="Logo" width="200" height="70">
   </a>
 
 <h3 align="center">Python Tech News</h3>
